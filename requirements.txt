@@ -7,3 +7,4 @@ shap==0.51.0
 matplotlib==3.10.9
 requests==2.33.1
 joblib==1.5.3
+shap==0.51.0
