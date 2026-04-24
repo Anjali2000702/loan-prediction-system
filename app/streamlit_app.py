@@ -60,19 +60,27 @@ with col2:
 
 if st.button("Predict Risk"):
 
+    if st.button("Predict Risk"):
+
     features = [0.0]*83
     features[5] = income
     features[6] = credit
     features[7] = annuity
 
-    response = requests.post(
-        "https://loan-api-z5me.onrender.com/predict",
-        json={"features": features}
-    )
+    with st.spinner("🔄 Predicting... please wait"):
 
-    result = response.json()
+        try:
+            response = requests.post(
+                "https://loan-api-z5me.onrender.com/predict",
+                json={"features": features}
+            )
 
-    if result["prediction"] == 1:
-        st.error(f"⚠️ High Risk of Default\nProbability: {result['probability']:.2f}")
-    else:
-        st.success(f"✅ Low Risk (Safe)\nProbability: {result['probability']:.2f}")
+            result = response.json()
+
+            if result["prediction"] == 1:
+                st.error(f"⚠️ High Risk of Default\n\nProbability: {result['probability']:.2f}")
+            else:
+                st.success(f"✅ Low Risk (Safe)\n\nProbability: {result['probability']:.2f}")
+
+        except:
+            st.error("❌ Server not responding. Please try again later.")
