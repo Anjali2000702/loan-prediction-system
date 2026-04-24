@@ -34,24 +34,19 @@
 
 import streamlit as st
 import requests
-
-import shap
 import joblib
 import numpy as np
-
-#model = joblib.load("../models/lgb_model.pkl")
 import os
 
+# Load model
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 model_path = os.path.join(BASE_DIR, "models", "lgb_model.pkl")
 
 model = joblib.load(model_path)
-explainer = shap.Explainer(model)
 
 st.set_page_config(page_title="Loan Risk Predictor", layout="centered")
 
 st.title("💰 Loan Default Prediction System")
-
 st.markdown("### Enter Customer Details")
 
 col1, col2 = st.columns(2)
@@ -81,21 +76,3 @@ if st.button("Predict Risk"):
         st.error(f"⚠️ High Risk of Default\nProbability: {result['probability']:.2f}")
     else:
         st.success(f"✅ Low Risk (Safe)\nProbability: {result['probability']:.2f}")
-    #         # SHAP explanation
-    # shap_values = explainer(np.array(features).reshape(1, -1))
-
-    # st.markdown("### 🔍 Model Explanation")
-
-    # shap.plots.waterfall(shap_values[0], show=False)
-    # st.pyplot(bbox_inches='tight')
-        # SHAP explanation
-    import matplotlib.pyplot as plt
-
-    shap_values = explainer(np.array(features).reshape(1, -1))
-
-    st.markdown("### 🔍 Model Explanation")
-
-    fig = plt.figure()
-    shap.plots.waterfall(shap_values[0], show=False)
-
-    st.pyplot(fig)
