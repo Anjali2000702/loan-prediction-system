@@ -60,7 +60,7 @@ with col2:
 
 if st.button("Predict Risk"):
 
-    if st.button("Predict Risk"):
+
 
     features = [0.0]*83
     features[5] = income
