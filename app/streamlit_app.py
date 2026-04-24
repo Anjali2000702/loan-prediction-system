@@ -63,10 +63,21 @@ if st.button("Predict Risk"):
 
 
     features = [0.0]*83
+
+    # Core financial features
     features[5] = income
     features[6] = credit
     features[7] = annuity
 
+    # Derived realistic features (IMPORTANT)
+    features[0] = credit / (income + 1)          # credit-income ratio
+    features[1] = annuity / (income + 1)         # annuity ratio
+    features[2] = credit / (annuity + 1)         # loan term proxy
+
+    # Add some variability (simulate real data)
+    features[10] = income * 0.3
+    features[11] = credit * 0.2
+    features[12] = annuity * 0.5
     with st.spinner("🔄 Predicting... please wait"):
 
         try:
