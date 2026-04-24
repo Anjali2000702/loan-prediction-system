@@ -39,7 +39,13 @@ import shap
 import joblib
 import numpy as np
 
-model = joblib.load("../models/lgb_model.pkl")
+#model = joblib.load("../models/lgb_model.pkl")
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR, "models", "lgb_model.pkl")
+
+model = joblib.load(model_path)
 explainer = shap.Explainer(model)
 
 st.set_page_config(page_title="Loan Risk Predictor", layout="centered")
