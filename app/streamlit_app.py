@@ -52,11 +52,11 @@ st.markdown("### Enter Customer Details")
 col1, col2 = st.columns(2)
 
 with col1:
-    income = st.number_input("Income", value=200000.0)
-    credit = st.number_input("Credit Amount", value=500000.0)
+    income = st.slider("Income", 50000, 1000000, 200000)
+    credit = st.slider("Credit Amount", 50000, 2000000, 500000)
 
 with col2:
-    annuity = st.number_input("Annuity", value=20000.0)
+    annuity = st.slider("Annuity", 5000, 100000, 20000)
 
 if st.button("Predict Risk"):
 
