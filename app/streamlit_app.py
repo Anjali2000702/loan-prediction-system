@@ -71,7 +71,7 @@ if st.button("Predict Risk"):
     features[7] = annuity
 
     response = requests.post(
-        "http://127.0.0.1:5000/predict",
+        "https://loan-api-z5me.onrender.com/predict",
         json={"features": features}
     )
 
